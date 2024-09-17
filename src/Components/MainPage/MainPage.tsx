@@ -1,24 +1,38 @@
 import { type FC } from 'react';
-import { Box, Typography } from '@mui/material';
+import { Box, Button, Typography } from '@mui/material';
+import useModalState from '../../Hooks/useModalState';
+import QuizDialog from './QuizDialog/QuizDialog';
 
-const MainPage: FC = () => (
-  <Box
-    id="main"
-    sx={{
-      flexGrow: 1,
-      maxWidth: '100%',
-      marginTop: 10,
-      marginLeft: 2,
-      marginRight: 2,
-      paddingTop: 2,
-      align: 'center',
-      height: 500,
-    }}
-  >
-    <Typography variant="h4" align="center" mt="5">
-      Главная
-    </Typography>
-  </Box>
-);
+const MainPage: FC = () => {
+  const modalTitle: string = 'Опрос';
+  const { open, openModal, clouseModal } = useModalState(false);
+
+  return (
+    <>
+      <Box
+        id="main"
+        sx={{
+          //   flexGrow: 1,
+          maxWidth: '100%',
+          marginTop: 10,
+          marginLeft: 2,
+          marginRight: 2,
+          paddingTop: 2,
+          align: 'center',
+          height: 500,
+        }}
+      >
+        <Typography variant="h4" mt="5" align="center" mb="10">
+          Главная
+        </Typography>
+
+        <Button variant="contained" onClick={openModal}>
+          Квиз
+        </Button>
+      </Box>
+      <QuizDialog open={open} cancel={clouseModal} title={modalTitle} />
+    </>
+  );
+};
 
 export default MainPage;

@@ -4,7 +4,6 @@ import useModalState from '../../Hooks/useModalState';
 import QuizDialog from './QuizDialog/QuizDialog';
 
 const MainPage: FC = () => {
-  const modalTitle: string = 'Опрос';
   const { open, openModal, clouseModal } = useModalState(false);
 
   return (
@@ -12,7 +11,6 @@ const MainPage: FC = () => {
       <Box
         id="main"
         sx={{
-          //   flexGrow: 1,
           maxWidth: '100%',
           marginTop: 10,
           marginLeft: 2,
@@ -30,7 +28,7 @@ const MainPage: FC = () => {
           Квиз
         </Button>
       </Box>
-      <QuizDialog open={open} cancel={clouseModal} title={modalTitle} />
+      <QuizDialog open={open} cancel={clouseModal} />
     </>
   );
 };

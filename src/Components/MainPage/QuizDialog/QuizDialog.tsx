@@ -1,26 +1,79 @@
 import Dialog from '@mui/material/Dialog/Dialog';
 import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText/DialogContentText';
-import DialogActions from '@mui/material/DialogActions/DialogActions';
-import Button from '@mui/material/Button/Button';
-import { FC } from 'react';
+import { FC, useContext } from 'react';
+import QuizBody from './QuizBody/QuizBody';
+import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
+import { Box } from '@mui/material';
+import { IFormInput } from '../../QuizStateContextProvider/initialItems';
+import { QuizStateContext } from '../../QuizStateContextProvider/context';
 
-const QuizDialog: FC<{ open: boolean; cancel: () => void; title: string }> = ({
+const QuizDialog: FC<{ open: boolean; cancel: () => void }> = ({
   open,
-  // confirm,
   cancel,
-  title,
-}) => (
-  <Dialog open={open} onClose={cancel}>
-    <DialogContent>
-      <DialogContentText variant="h6" color="blue">
-        {title}
-      </DialogContentText>
-    </DialogContent>
-    <DialogActions>
-      <Button onClick={cancel}>Нет</Button>
-    </DialogActions>
-  </Dialog>
-);
+}) => {
+  const { handleReset } = useContext(QuizStateContext);
+  const methods = useForm<IFormInput>({
+    defaultValues: {
+      checkBoxes1: {
+        apartment: false,
+        land: false,
+        car: false,
+        otherProperty: false,
+        none: false,
+      },
+      checkBoxes2: {
+        mfo: false,
+        carLoan: false,
+        kingLoan: false,
+        bailiff: false,
+        privateLoans: false,
+        other: false,
+      },
+      radioButtons1: {
+        options: '',
+      },
+      radioButtons2: {
+        options: '',
+      },
+      radioButtons3: {
+        options: '',
+      },
+      radioButtons4: {
+        options: '',
+      },
+      radioButtons5: {
+        options: '',
+      },
+      radioButtons6: {
+        options: '',
+      },
+      textFields: {
+        name: '',
+        phone: '',
+        email: '',
+      },
+    },
+  });
+
+  const onSubmit: SubmitHandler<IFormInput> = (data) => {
+    console.log('Form Data:', data);
+    cancel();
+    handleReset();
+  };
+
+  return (
+    <Dialog open={open} onClose={cancel}>
+      <DialogContent>
+        <FormProvider {...methods}>
+          <form onSubmit={methods.handleSubmit(onSubmit)}>
+            <Box sx={{ width: 500, height: 300 }}>
+              <QuizBody />
+            </Box>
+          </form>
+        </FormProvider>
+      </DialogContent>
+    </Dialog>
+  );
+};
 
 export default QuizDialog;

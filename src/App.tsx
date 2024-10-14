@@ -4,14 +4,17 @@ import { BrowserRouter } from 'react-router-dom';
 import ScrollToTop from './Components/ScrollToTop/ScrollToTop';
 import AppHeader from './Components/AppHeader/AppHeader';
 import AppFooter from './Components/AppFooter/AppFooter';
+import QuizStateContextProvider from './Components/QuizStateContextProvider/context';
 
 const App: FC = () => (
-  <BrowserRouter>
-    <ScrollToTop />
-    <AppHeader />
-    <RootRoutes />
-    <AppFooter />
-  </BrowserRouter>
+  <QuizStateContextProvider>
+    <BrowserRouter>
+      <ScrollToTop />
+      <AppHeader />
+      <RootRoutes />
+      <AppFooter />
+    </BrowserRouter>
+  </QuizStateContextProvider>
 );
 
 export default App;

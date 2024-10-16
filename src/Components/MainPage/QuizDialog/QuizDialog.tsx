@@ -66,7 +66,15 @@ const QuizDialog: FC<{ open: boolean; cancel: () => void }> = ({
       <DialogContent>
         <FormProvider {...methods}>
           <form onSubmit={methods.handleSubmit(onSubmit)}>
-            <Box sx={{ width: 500, height: 300 }}>
+            <Box
+              sx={{
+                overflowX: 'hidden',
+                width: 550,
+                height: 350,
+                display: 'flex',
+                flexDirection: 'column',
+              }}
+            >
               <QuizBody />
             </Box>
           </form>

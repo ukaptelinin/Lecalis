@@ -10,7 +10,7 @@ const QuizItemRadio: FC<{ index: number }> = ({ index }) => {
   const { control } = useFormContext();
   const radioLabels = Array.from(quizItems[index].labels);
   return (
-    <Box>
+    <Box width="100%">
       <Controller
         name={`radioButtons${quizItems[index].partitionKey}.options`}
         control={control}

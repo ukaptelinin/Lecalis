@@ -46,9 +46,10 @@ const QuizBody: FC = () => {
         renderItem: (
           <Box
             sx={{
+              width: '100%',
               display: 'flex',
               flexDirection: 'column',
-              justifyContent: 'center',
+              justifyContent: 'flex-start',
             }}
           >
             <Typography variant="h6" color="blue" align="center">
